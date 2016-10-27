@@ -14,37 +14,15 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textSize="20sp"
-            android:textColor="#fff"
-            android:text="@string/str_message"/>
+        <include layout="@layout/home_layout" />
 
-        <ImageButton
-            android:layout_marginTop="100dp"
-            android:id="@+id/qr_code_image_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/qr_code"
-            android:layout_centerHorizontal="true" />
-
-        <ImageButton
-            android:id="@+id/bar_code_image_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/barcode_image"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:layout_below="@id/qr_code_image_button"/>
-
-    </RelativeLayout>
+    </FrameLayout>
 
 
 

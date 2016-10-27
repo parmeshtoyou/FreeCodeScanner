@@ -3,4 +3,5 @@
     <string name="action_settings">Settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-3025841138234865/1859449230</string>
     <string name="str_message">Click Below To Scan Code</string>
+    <string name="str_scan_result">Scan Result</string>
 </resources>
