@@ -36,13 +36,6 @@ public class ScanQRCodeFragment extends Fragment implements ZXingScannerView.Res
         return mScannerView;
     }
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mScannerView = new ZXingScannerView(this);
-        setContentView(mScannerView);
-    }*/
-
     @Override
     public void onResume() {
         super.onResume();

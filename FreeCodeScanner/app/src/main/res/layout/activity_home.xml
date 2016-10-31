@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context="scanner.code.free.freecodescanner.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -21,6 +22,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_layout" />
+    <include layout="@layout/bannerlayout" />
 
 </android.support.design.widget.CoordinatorLayout>

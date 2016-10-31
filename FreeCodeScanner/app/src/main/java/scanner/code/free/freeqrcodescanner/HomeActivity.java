@@ -3,24 +3,33 @@ package scanner.code.free.freeqrcodescanner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.zxing.Result;
+
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, MessageDialogFragment.Communicator {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
+        MessageDialogFragment.Communicator, ZXingScannerView.ResultHandler {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private AdView mAdView;
+    private ZXingScannerView mScannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(scanner.code.free.freeqrcodescanner.R.layout.activity_home);
+        setContentView(R.layout.activity_home);
 
         Toolbar toolbar = (Toolbar) findViewById(scanner.code.free.freeqrcodescanner.R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -29,12 +38,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        mScannerView = new ZXingScannerView(this);
 
-        ImageButton qrScannerImageView = (ImageButton) findViewById(scanner.code.free.freeqrcodescanner.R.id.qr_code_image_button);
-        ImageButton barCodeScanner = (ImageButton) findViewById(scanner.code.free.freeqrcodescanner.R.id.bar_code_image_button);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        mScannerView.setLayoutParams(params);
+        frameLayout.addView(mScannerView);
 
-        qrScannerImageView.setOnClickListener(this);
-        barCodeScanner.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +53,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if(null != mAdView){
             mAdView.resume();
         }
+
+        mScannerView.setResultHandler(this);
+        mScannerView.startCamera();
     }
 
     @Override
@@ -82,14 +95,30 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onDialogButtonClick() {
 
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(ScanQRCodeFragment.class.getName());
+        /*Fragment fragment = getSupportFragmentManager().findFragmentByTag(ScanQRCodeFragment.class.getName());
         if(fragment == null) {
             fragment = ScanQRCodeFragment.newInstance();
         }
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();*/
+        mScannerView.setResultHandler(this);
+        mScannerView.startCamera();
 
-        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+    }
 
-        /*getSupportFragmentManager().beginTransaction().add(R.id.container, fragment, fragment.getClass().getName())
-                .commit();*/
+    @Override
+    public void handleResult(Result result) {
+        Log.d(TAG, result.getBarcodeFormat().toString());
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        // Create and show the dialog.
+        MessageDialogFragment newFragment = new MessageDialogFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.RESULT_KEY, result.getText());
+        newFragment.setArguments(bundle);
+
+        newFragment.show(ft, getString(R.string.str_scan_result));
+
+        getFragmentManager().popBackStack();
     }
 }
