@@ -14,69 +14,65 @@ import android.widget.ImageButton;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.zxing.Result;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
-
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,
-        MessageDialogFragment.Communicator, ZXingScannerView.ResultHandler {
+        MessageDialogFragment.Communicator {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private AdView mAdView;
-    private ZXingScannerView mScannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = (Toolbar) findViewById(scanner.code.free.freeqrcodescanner.R.id.toolbar);
+        /*Toolbar toolbar = (Toolbar) findViewById(scanner.code.free.freeqrcodescanner.R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mAdView = (AdView) findViewById(scanner.code.free.freeqrcodescanner.R.id.adView);
+*/
+        /*mAdView = (AdView) findViewById(scanner.code.free.freeqrcodescanner.R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
-        mScannerView = new ZXingScannerView(this);
+        /*mScannerView = new ZXingScannerView(this);
 
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        FrameLayout frameLayout = findViewById(R.id.frame_layout);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT);
         mScannerView.setLayoutParams(params);
-        frameLayout.addView(mScannerView);
+        frameLayout.addView(mScannerView);*/
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(null != mAdView){
+        /*if(null != mAdView){
             mAdView.resume();
-        }
+        }*/
 
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera();
+       /* mScannerView.setResultHandler(this);
+        mScannerView.startCamera();*/
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(null != mAdView){
+        /*if(null != mAdView){
             mAdView.pause();
-        }
+        }*/
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(null != mAdView){
+        /*if(null != mAdView){
             mAdView.destroy();
-        }
+        }*/
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == scanner.code.free.freeqrcodescanner.R.id.bar_code_image_button) {
+        /*if(view.getId() == scanner.code.free.freeqrcodescanner.R.id.bar_code_image_button) {
             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
             intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
             startActivityForResult(intent, 0); //Barcode Scanner to scan for us
@@ -85,10 +81,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             if(fragment == null) {
                 fragment = ScanQRCodeFragment.newInstance();
             }
-
             getSupportFragmentManager().beginTransaction().add(scanner.code.free.freeqrcodescanner.R.id.container, fragment, fragment.getClass().getName())
                     .commit();
-        }
+        }*/
     }
 
 
@@ -100,14 +95,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             fragment = ScanQRCodeFragment.newInstance();
         }
         getSupportFragmentManager().beginTransaction().remove(fragment).commit();*/
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera();
+        /*mScannerView.setResultHandler(this);
+        mScannerView.startCamera();*/
 
     }
 
-    @Override
+    /*@Override
     public void handleResult(Result result) {
-        Log.d(TAG, result.getBarcodeFormat().toString());
+        *//*Log.d(TAG, result.getBarcodeFormat().toString());
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         // Create and show the dialog.
@@ -119,6 +114,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         newFragment.show(ft, getString(R.string.str_scan_result));
 
-        getFragmentManager().popBackStack();
-    }
+        getFragmentManager().popBackStack();*//*
+    }*/
 }
