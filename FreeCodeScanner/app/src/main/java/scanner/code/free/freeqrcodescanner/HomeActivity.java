@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -25,6 +26,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        LinearLayout layout_back_icon = findViewById(R.id.layout_back_icon);
+        layout_back_icon.setOnClickListener(this);
+
+
 
         /*Toolbar toolbar = (Toolbar) findViewById(scanner.code.free.freeqrcodescanner.R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,6 +90,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getSupportFragmentManager().beginTransaction().add(scanner.code.free.freeqrcodescanner.R.id.container, fragment, fragment.getClass().getName())
                     .commit();
         }*/
+
+        switch (view.getId()) {
+            case R.id.layout_back_icon:
+                finish();
+                break;
+        }
     }
 
 

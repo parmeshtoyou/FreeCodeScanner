@@ -18,14 +18,15 @@
         android:focusable="true"
         android:orientation="horizontal">
 
-        <!--<ImageView
+        <ImageView
             android:id="@+id/iv_header_icon_back"
-            android:layout_width="@dimen/header_back_icon_width"
-            android:layout_height="@dimen/header_back_icon_height"
-            android:layout_marginStart="@dimen/header_back_icon_marginL"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_gravity="center_vertical"
             android:scaleType="fitXY"
-            android:src="@drawable/back_arrow" />-->
+            android:src="@drawable/back_arrow" />
 
         <TextView
             android:id="@+id/t_header_back"
