@@ -30,8 +30,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout layout_back_icon = findViewById(R.id.layout_back_icon);
         layout_back_icon.setOnClickListener(this);
 
-
-
         /*Toolbar toolbar = (Toolbar) findViewById(scanner.code.free.freeqrcodescanner.R.id.toolbar);
         setSupportActionBar(toolbar);
 */
