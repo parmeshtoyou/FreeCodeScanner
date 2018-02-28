@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()) {
             case R.id.layout_back_icon:
-                finish();
+                finish(); //this is for testing purpose
                 break;
         }
     }
